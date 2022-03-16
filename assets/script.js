@@ -1,4 +1,3 @@
-// Assignment code here
 var generatePassword = function() {
   var generatedPassword = "";
   var characterSet = "";
