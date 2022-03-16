@@ -1,3 +1,4 @@
+var characterList = "";
 var generatePassword = function() {
   var generatedPassword = "";
   var characterSet = "";
@@ -16,31 +17,43 @@ var generatePassword = function() {
     generatePassword();
   }
 
-  var lowercase = window.confirm("Would you like your password to include lowercase letters?");
-  if (lowercase) {
-    characterSet += "qwertyuiopasdfghjklzxcvbnm";
-  }
-
-  var uppercase = window.confirm("Would you like your password to include uppercase letters?");
-  if (uppercase) {
-    characterSet += "QWERTYUIOPASDFGHJKLZXCVBNM";
-  }
-
-  var numbers = window.confirm("Would you like your password to include numbers?");
-  if (numbers) {
-    characterSet += "1234567890";
-  }
-
-  var special = window.confirm("Would you like your password to include other special characaters?");
-  if (special) {
-    characterSet += " !\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
-  }
+  var characterSet = characterTypes();
 
   for (var i = 0; i < passwordLength; i++) {
     generatedPassword += characterSet.charAt(Math.floor(Math.random() * characterSet.length));
   }
 
   return generatedPassword;
+}
+
+var characterTypes = function() {
+  
+  var lowercaseSet = window.confirm("Would you like your password to include lowercase letters?");
+  if (lowercaseSet) {
+    characterList += "qwertyuiopasdfghjklzxcvbnm";
+  }
+
+  var uppercaseSet = window.confirm("Would you like your password to include uppercase letters?");
+  if (uppercaseSet) {
+    characterList += "QWERTYUIOPASDFGHJKLZXCVBNM";
+  }
+
+  var numberSet = window.confirm("Would you like your password to include numbers?");
+  if (numberSet) {
+    characterList += "1234567890";
+  }
+
+  var specialSet = window.confirm("Would you like your password to include other special characters?");
+  if (specialSet) {
+    characterList += " !\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
+  }
+
+  if (characterList === "") {
+    alert("You didn't select any character types to include in your password. Let's go through each one again.");
+    characterTypes();
+  }
+
+  return characterList;
 }
 
 // Get references to the #generate element
